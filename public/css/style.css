@@ -1,0 +1,357 @@
+/* 全体 */
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background-color: #CCCCCC;
+    display: flex;
+}
+
+/* 共通 */
+.btn {
+    border: black solid 1px;
+    width: 80px;
+    height: 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+
+/* 外枠 */
+.container {
+    height: 100vh;
+    width: 100%;
+    margin-left: 15%;
+    margin-right: 15%;
+    background-color: white;
+    border-left: solid black 2px;
+    border-right: solid black 2px;
+	justify-content: center;
+    display: flex;
+}
+
+/* 内枠 */
+.screen-container {
+    width: 700px;
+    /* border: solid black 1px; */
+    margin-top: 100px;
+    margin-bottom: 200px;
+    margin-left: 15%;
+    margin-right: 15%;
+    display: block;
+}
+
+/* 名前を入力・追加する枠 */
+.input-clear-add-container {
+    height: 50px;
+    width: 700px;
+    border: 1px black solid;
+    padding-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* 名前入力欄 */
+.input-clear-add-container input {
+    border: black solid 1px;
+    font-size: 120%;
+    width: 350px;
+    height: 30px;
+    margin-left: 50px;
+    padding-left: 10px;
+}
+/* クリア・追加ボタンの枠 */
+.btn-container {
+    width: fit-content;
+    float: right;
+    margin-right: 50px;
+    margin-top: 2px;
+}
+/* クリアボタン */
+.clear-btn {
+    background-color: #ffff37;
+    margin-right: 5px;
+    
+}
+.clear-btn:hover {
+    background-color: #ffffae;
+}
+/* 追加ボタン */
+.add-btn {
+    background-color: #1731fa;
+    color: white;
+}
+.add-btn:hover {
+    background-color: #576aff;
+}
+
+/* 人物追加情報2画面の枠 */
+.two-containers {
+    width: 100%;
+    height: 100%;
+    margin-top: 20px;
+    display: flex;
+}
+
+/* 名前追加後の表示枠 */
+.persson-information-container {
+    width: 48%;
+    height: 100%;
+    border: solid black 1px;
+    display: flex;
+    flex-flow: column;
+    position: relative;
+}
+.person-information {
+    display: flex;
+    height: fit-content;
+    width: 100%;
+    height: 78%;
+    justify-content: center;
+    padding-top: 5%;
+    display: block;
+    border-top: black 1px solid;
+    border-bottom: black 1px solid;
+    margin-top: 20px;
+    overflow: auto;
+}
+/* 追加後の名前と削除ボタンの枠 */
+.selected-person-container {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+}
+.person-information p {
+    width: 70%;
+    height: 30px;
+    margin-left: 20px;
+    border: black solid 1px;
+    text-align: center;
+}
+.person-information p a{
+    font-size: 1.2rem;
+}
+.person-information p:hover{
+    background-color: #EEEEEE;
+    color: #ffff37;
+}
+/* 削除ボタン */
+.delete-btn {
+    background-color: #fc1818;
+    color: white;
+    width: 60px;
+    margin-left: auto;
+    margin-right: 10px;
+    margin-top: 17px;
+}
+.delete-btn:hover {
+    background-color: #ff5e5e;
+}
+/* 集計ボタン枠 */
+.total-btn-container {
+    width: 100%;
+    height: 93px;
+    border-top: solid black 1px;
+    background-color: #f4f0f0;
+    display: flex;
+    position: absolute;
+    bottom: 0;
+}
+/* 集計ボタン */
+.total-btn {
+    height: 50px;
+    width: 70%;
+    font-size: 1.5rem;
+    background-color: #1731fa;
+    color: white;
+    border: black solid 1px;
+    margin: auto;
+}
+.total-btn:hover {
+    background-color: #576aff;
+}
+
+/* 人物の内容詳細画面 */
+.persson-detail-container {
+    width: 48%;
+    height: 100%;
+    border: solid black 1px;
+    margin-left: auto;
+    position: relative;
+}
+
+/* 名前押下後の名前タイトル枠 */
+.person-title {
+    width: 100%;
+    height: 8%;
+    border-bottom: black solid 1px;
+    text-align: center;
+}
+.person-title p{
+    width: 100%;
+    height: 100%;
+    font-size: 1.5rem;
+    margin: 0 auto;
+    padding-top: 10px;
+    font-weight: bold;
+}
+/* 内容・金額・削除ボタン枠 */
+.content-cost-container {
+    width: 100%;
+    height: 75.5%;
+    border-bottom: solid black 1px;
+    overflow: auto;
+}
+/* 内容・金額・削除ボタン内枠 */
+.content-cost {
+    width: 80%;
+    height: 100px;
+    border: black solid 1px;
+    margin: 10px 10% 20px 10%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    position: relative
+}
+/* 追加・保存ボタン枠 */
+.add-store-btn-container {
+    width: 100%;
+    height: 93px;
+    border-top: solid black 1px;
+    background-color: #f4f0f0;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+}
+.input-content-cost {
+    width: 70%;
+}
+/* 内容入力 */
+.content {
+    height: 40px;
+    width: 100%;
+    border: black solid 1px;
+    font-size: 120%;
+    padding-left: 10px;
+    margin-bottom: 2px;
+}
+/* 金額入力 */
+.cost {
+    height: 40px;
+    width: 100%;
+    border: black solid 1px;
+    /* border-left: black solid 1px;
+    border-right: black solid 1px;
+    border-bottom: black solid 1px; */
+    font-size: 120%;
+    padding-left: 10px;
+}
+/* 削除ボタン2 */
+.delete-btn2 {
+    height: 50px;
+    margin: 0;
+    margin-right: auto;
+    margin-right: 0;
+    margin-left: 15px;
+}
+/* 追加・保存内枠 */
+.add-store {
+    width: 100%;
+    margin: 0 auto;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+/* 追加ボタン2 */
+.add-btn2 {
+    height: 60px;
+    width: 100px;
+    margin-right: 40px;
+}
+/* 保存ボタン */
+.store-btn {
+    background-color: #1731fa;
+    color: white;
+    height: 60px;
+    width: 100px;
+}
+.store-btn:hover {
+    background-color: #576aff;
+}
+
+
+/* totaling.html */
+
+/* 集計枠 */
+.total-amount-information {
+    display: flex;
+    height: fit-content;
+    width: 100%;
+    height: 78%;
+    justify-content: center;
+    padding-top: 5%;
+    display: block;
+    border-top: black 1px solid;
+    border-bottom: black 1px solid;
+    margin-top: 20px;
+    overflow: auto;
+}
+/* 集計押下後の個人集計枠 */
+.table-container {
+    border: solid 1px black;
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 20px;
+}
+/* テーブル左側 */
+.table-container tbody tr th{
+    border: solid 1px black;
+    width: 80px;
+    height: 30px;
+    background-color: #f4f0f0;
+}
+/* テーブル右側 */
+.table-container tbody tr td{
+    border: solid 1px black;
+    text-align: center;
+}
+
+/*  */
+.showing-total-amount-container {
+    width: 100%;
+    height: 93px;
+    border-top: solid black 1px;
+    background-color: #f4f0f0;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+}
+.showing-total-amount {
+    width: 100%;
+    text-align: center;
+}
+.total-title{
+    display:inline-block;
+    width: 90px;
+    height: 40px;
+    border: black solid 1px;
+    background-color: white;
+    margin-right: 10px;
+    font-size: 1.5rem;
+}
+.total-amount {
+    display:inline-block;
+    width: 200px;
+    height: 40px;
+    border: black solid 1px;
+    background-color: white;
+    font-size: 1.5rem;
+}
