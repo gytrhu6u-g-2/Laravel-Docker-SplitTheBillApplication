@@ -19,6 +19,20 @@
                     </ul>
                 </div>
             @endif
+            @if (session('success_msg'))
+                <div class="alert alert-success">
+                    <ul>
+                        <li>{{ session('success_msg') }}</li>
+                    </ul>
+                </div>
+            @endif
+            @if (session('err_msg'))
+                <div class="alert alert-danger">
+                    <ul>
+                        <li>{{ session('err_msg') }}</li>
+                    </ul>
+                </div>
+            @endif
             <div class="input-clear-add-container">
                 <form action="{{ route('store') }}" method="POST">
                     @csrf
@@ -37,7 +51,11 @@
                                 @foreach ($persons as $person)
                                     <div class="selected-person-container">
                                         <p><a href="#">{{ $person->name }}</a></p>
-                                        <button class="delete-btn btn">削除</button>
+                                        <form method="POST" action="{{ route('delete', $person->id) }}">
+                                         @csrf
+                                         <button type="submit" class="delete-btn btn" onclick="return confirmDelete()">削除</button>
+                                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                                        </form>
                                     </div>
                                 @endforeach
                             @else

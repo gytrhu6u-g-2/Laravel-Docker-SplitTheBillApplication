@@ -16,9 +16,8 @@ class SpritTheBill extends Controller
      * トップ画面を表示する
      * @return view
      */
-    public function showTop() {        
+    public function showTop() {                
         $persons = Person::get();
-        // dd($persons);
         return view('index.top', ['persons' => $persons]);
     }
 
@@ -45,6 +44,20 @@ class SpritTheBill extends Controller
         }
         session()->flash('success_msg', '追加完了しました。');
         return redirect(route('top'));
+    }
+
+    /**
+     * 削除機能
+     * @param id
+     * @return view
+     */
+    public function exeDelete($id) {
+        $person = Person::find($id);
+        if (!empty($id)) {
+            $person->delete();
+            return redirect(route('top'))->with('success_msg','削除完了しました。');
+        }
+        return redirect(route('top'))->with('err_msg','削除失敗しました。');
     }
 }
 

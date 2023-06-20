@@ -7,3 +7,13 @@ function clearChar() {
     }
     element.value = '';
 }
+
+// 削除確認ボタン
+function confirmDelete() {
+    let confirm = window.confirm('本当に削除しますか？');
+    if (confirm) {
+        return true;
+    } else {
+        return false;
+    }
+}
