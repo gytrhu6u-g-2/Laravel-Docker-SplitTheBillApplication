@@ -10,7 +10,7 @@ function clearChar() {
 
 // 削除確認ボタン
 function confirmDelete() {
-    let confirm = window.confirm('本当に削除しますか？');
+    let confirm = window.confirm('削除します。よろしいですか？');
     if (confirm) {
         return true;
     } else {
