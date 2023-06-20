@@ -42,7 +42,6 @@ class SpritTheBill extends Controller
             DB::rollback();
             abort(500);
         }
-        session()->flash('success_msg', '追加完了しました。');
         return redirect(route('top'));
     }
 
@@ -55,7 +54,7 @@ class SpritTheBill extends Controller
         $person = Person::find($id);
         if (!empty($id)) {
             $person->delete();
-            return redirect(route('top'))->with('success_msg','削除完了しました。');
+            return redirect(route('top'))->with('success_msg','削除しました。');
         }
         return redirect(route('top'))->with('err_msg','削除失敗しました。');
     }
