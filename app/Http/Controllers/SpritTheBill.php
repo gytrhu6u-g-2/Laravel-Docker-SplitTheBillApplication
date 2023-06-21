@@ -58,5 +58,20 @@ class SpritTheBill extends Controller
         }
         return redirect(route('top'))->with('err_msg','削除失敗しました。');
     }
+
+    /**
+     * 内容入力ページへ遷移
+     * @param id
+     * @return view
+     */
+    public function showAmount($id) {
+        $persons = Person::get();
+        // dd($persons);
+        $person = Person::find($id);
+        if (empty($person)) {
+            return redirect(route('index.top'))->with('err_msg','idが見つかりませんでした。');
+        }
+        return view('index.enterAmount', ['person' => [$person], 'persons'=>$persons]);
+    }
 }
 

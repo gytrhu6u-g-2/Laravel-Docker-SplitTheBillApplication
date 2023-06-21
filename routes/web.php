@@ -14,8 +14,11 @@ use App\Http\Controllers\SpritTheBill;
 |
 */
 
+// topページ
 Route::get('/', [SpritTheBill::class, 'showTop'])->name('top');
 // 保存
 Route::post('/add', [SpritTheBill::class, 'exeStore'])->name('store');
 // 削除
 Route::post('/delete/{id}', [SpritTheBill::class, 'exeDelete'])->name('delete');
+// 内容入力ページへ遷移
+Route::get('/amount/{id}', [SpritTheBill::class, 'showAmount'])->name('amount');

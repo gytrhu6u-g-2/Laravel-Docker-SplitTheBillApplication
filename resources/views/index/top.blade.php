@@ -47,10 +47,10 @@
             <div class="two-containers">
                 <div class="persson-information-container">
                     <div class="person-information">
-                            @if ($persons->isNotEmpty())
+                            @if (!empty($persons))
                                 @foreach ($persons as $person)
                                     <div class="selected-person-container">
-                                        <p><a href="#">{{ $person->name }}</a></p>
+                                        <p><a href="{{ route('amount', ['id'=>$person->id]) }}">{{ $person->name }}</a></p>
                                         <form method="POST" action="{{ route('delete', $person->id) }}">
                                          @csrf
                                          <button type="submit" class="delete-btn btn" onclick="return confirmDelete()">削除</button>
@@ -60,8 +60,8 @@
                                 @endforeach
                             @else
                                 <div class="selected-person-container">
-                                    {{-- <p><a href="#"></a></p>
-                                    <button class="delete-btn btn">削除</button> --}}
+                                    <p><a href="#"></a></p>
+                                    <button class="delete-btn btn">削除</button>
                                 </div>
                             @endif
                     </div>
@@ -70,7 +70,7 @@
                     </div>
                 </div>
                 <div class="persson-detail-container">
-                    
+                    @yield('content')
                 </div>
             </div>
         </div>
