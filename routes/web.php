@@ -22,3 +22,5 @@ Route::post('/add', [SpritTheBill::class, 'exeStore'])->name('store');
 Route::post('/delete/{id}', [SpritTheBill::class, 'exeDelete'])->name('delete');
 // 内容入力ページへ遷移
 Route::get('/amount/{id}', [SpritTheBill::class, 'showAmount'])->name('amount');
+// 内容追加
+Route::get('/amount/add/{name}', [SpritTheBill::class, 'exeAdd'])->name('add');

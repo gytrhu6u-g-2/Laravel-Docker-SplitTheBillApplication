@@ -73,5 +73,32 @@ class SpritTheBill extends Controller
         }
         return view('index.enterAmount', ['person' => [$person], 'persons'=>$persons]);
     }
+
+
+    /**
+     * 内容追加処理
+     * @param name
+     * @return view
+     */
+    public function exeAdd($name) {
+        $PersonName = Person::where('name', $name)->first();
+        $person = Person::find($PersonName->id);
+        // dd($person);
+        DB::beginTransaction();
+        try {
+            Content::create([
+                'name'=>$PersonName->name,
+                'content'=> "",
+                'cost'=> 0,
+            ]);
+            DB::commit();
+        } catch(\Exception $e) {
+            DB::rollback();
+            abort(500);
+        }
+        $datas = Content::where('name', $name)->get();
+        // dd($datas);
+        return view('index.enterAmount', ['person' => [$person], 'datas' => $datas]);
+    }
 }
 
