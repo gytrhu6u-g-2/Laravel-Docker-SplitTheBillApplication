@@ -66,12 +66,12 @@ class SpritTheBill extends Controller
      */
     public function showAmount($id) {
         $persons = Person::get();
-        // dd($persons);
         $person = Person::find($id);
         if (empty($person)) {
             return redirect(route('index.top'))->with('err_msg','idが見つかりませんでした。');
         }
-        return view('index.enterAmount', ['person' => [$person], 'persons'=>$persons]);
+        $datas = Content::where('name', '=', $person['name'])->get();
+        return view('index.enterAmount', ['person' => [$person], 'persons'=>$persons, 'datas'=>$datas]);
     }
 
 
@@ -81,6 +81,7 @@ class SpritTheBill extends Controller
      * @return view
      */
     public function exeAdd($name) {
+        $persons = Person::get();
         $PersonName = Person::where('name', $name)->first();
         $person = Person::find($PersonName->id);
         // dd($person);
@@ -97,8 +98,7 @@ class SpritTheBill extends Controller
             abort(500);
         }
         $datas = Content::where('name', $name)->get();
-        // dd($datas);
-        return view('index.enterAmount', ['person' => [$person], 'datas' => $datas]);
+        return view('index.enterAmount', ['person' => [$person], 'datas' => $datas, 'persons'=>$persons]);
     }
 }
 

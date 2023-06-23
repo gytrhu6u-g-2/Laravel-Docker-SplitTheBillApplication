@@ -7,7 +7,7 @@
         </div>
     @endforeach
     <div class="content-cost-container">
-        @foreach ($datas as $data)
+            @foreach ($datas as $data)
                 <div class="content-cost">
                     <div class="input-content-cost">
                         <input type="text" class="content" placeholder="内容" value="{{ $data->content }}">
@@ -18,7 +18,7 @@
                         <button class="delete-btn btn delete-btn2">削除</button>
                     </div>
                 </div>
-        @endforeach
+            @endforeach
     </div>
     <div class="add-store-btn-container">
         <div class="add-store">
