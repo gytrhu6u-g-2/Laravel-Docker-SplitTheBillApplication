@@ -100,5 +100,25 @@ class SpritTheBill extends Controller
         $datas = Content::where('name', $name)->get();
         return view('index.enterAmount', ['person' => [$person], 'datas' => $datas, 'persons'=>$persons]);
     }
+
+    /**
+     * 内容削除処理
+     * @param id
+     * @return view
+     */
+    public function exeDeleteContent($id) {
+        $content = Content::find($id);
+        $persons = Person::get();
+        $PersonName = Person::where('name', $content['name'])->first();
+        $person = Person::find($PersonName->id);
+        $datas = Content::where('name', $content['name'])->get();
+
+        if (!empty($content)) {
+            $content->delete();
+            return redirect(route('amount', ['id' => $person->id, 'person' => [$person], 'datas' => $datas, 'persons'=>$persons]))->with('success_msg', '削除に成功しました。');
+            // return view('index.enterAmount', ['person' => [$person], 'datas' => $datas, 'persons'=>$persons])->with('success_msg', '削除に成功しました。');
+        }
+        return redirect(route('amount', ['id' => $person->id, 'person' => [$person], 'datas' => $datas, 'persons'=>$persons]))->with('err_msg', '削除に失敗しました。');
+    }
 }
 

@@ -12,10 +12,13 @@
                     <div class="input-content-cost">
                         <input type="text" class="content" placeholder="内容" value="{{ $data->content }}">
                         <input type="text" class="cost" placeholder="金額" value="{{ $data->cost }}">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                     </div>
                     <div>
-                        <button class="delete-btn btn delete-btn2">削除</button>
+                        <form action="{{ route('deleteContent', $data->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="delete-btn btn delete-btn2" onclick="return confirmDelete()">削除</button>
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                        </form>
                     </div>
                 </div>
             @endforeach
