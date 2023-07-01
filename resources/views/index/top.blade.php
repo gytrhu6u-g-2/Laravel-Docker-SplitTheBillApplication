@@ -47,26 +47,26 @@
             <div class="two-containers">
                 <div class="persson-information-container">
                     <div class="person-information">
-                            @if (!empty($persons))
-                                @foreach ($persons as $person)
-                                    <div class="selected-person-container">
-                                        <p><a href="{{ route('amount', ['id'=>$person->id]) }}">{{ $person->name }}</a></p>
-                                        <form method="POST" action="{{ route('delete', $person->id) }}">
-                                         @csrf
-                                         <button type="submit" class="delete-btn btn" onclick="return confirmDelete()">削除</button>
-                                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                                        </form>
-                                    </div>
-                                @endforeach
-                            @else
+                        @if (!empty($persons))
+                            @foreach ($persons as $person)
                                 <div class="selected-person-container">
-                                    <p><a href="#"></a></p>
-                                    <button class="delete-btn btn">削除</button>
+                                    <p><a href="{{ route('amount', ['id'=>$person->id]) }}">{{ $person->name }}</a></p>
+                                    <form method="POST" action="{{ route('delete', $person->id) }}">
+                                        @csrf
+                                        <button type="submit" class="delete-btn btn" onclick="return confirmDelete()">削除</button>
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                                    </form>
                                 </div>
-                            @endif
+                            @endforeach
+                        @else
+                            <div class="selected-person-container">
+                                <p><a href="#"></a></p>
+                                <button class="delete-btn btn">削除</button>
+                            </div>
+                        @endif
                     </div>
                     <div class="total-btn-container">
-                        <button class="total-btn btn">集計</button>
+                        <button class="total-btn btn" onclick="location.href='{{ route('showTotaling') }}'">集計</button>
                     </div>
                 </div>
                 <div class="persson-detail-container">

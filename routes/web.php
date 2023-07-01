@@ -28,3 +28,5 @@ Route::get('/amount/add/{name}', [SpritTheBill::class, 'exeAdd'])->name('add');
 Route::post('/amount/delete/{id}', [SpritTheBill::class, 'exeDeleteContent'])->name('deleteContent');
 // 内容保存処理
 Route::post('/amount/update', [SpritTheBill::class, 'exeContentStore'])->name('contentStore');
+// 集計画面
+Route::get('/totaling', [SpritTheBill::class, 'showTotaling'])->name('showTotaling');
