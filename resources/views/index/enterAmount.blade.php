@@ -1,34 +1,39 @@
 @extends('index.top')
 
 @section('content')
-    @foreach ($person as $person)
-        <div class="person-title">
-            <p>{{ $person->name }}</p>
-        </div>
-    @endforeach
+@foreach ($person as $person)
+<div class="person-title">
+    <p>{{ $person->name }}</p>
+</div>
+@endforeach
+{{-- <form action="{{ route('update') }}" id="update" method="POST">
+    @csrf
+    <input type="hidden" name="name[][name]" value="{{ $person->name }}">
     <div class="content-cost-container">
-            @foreach ($datas as $data)
-                <div class="content-cost">
-                    <div class="input-content-cost">
-                        <input type="text" class="content" placeholder="内容" value="{{ $data->content }}">
-                        <input type="text" class="cost" placeholder="金額" value="{{ $data->cost }}">
-                    </div>
-                    <div>
-                        <form action="{{ route('deleteContent', $data->id) }}" method="POST">
-                            @csrf
-                            <button type="submit" class="delete-btn btn delete-btn2" onclick="return confirmDelete()">削除</button>
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                        </form>
-                    </div>
-                </div>
-            @endforeach
+        <p></p>
     </div>
-    <div class="add-store-btn-container">
-        <div class="add-store">
-            <form action="{{ route('add', ['name'=>$person->name]) }}" method="GET">
-                <button type="submit" class="btn add-btn add-btn2">追加</button>
-            </form>
-            <button class="btn store-btn">保存</button>
-        </div>
+    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+</form> --}}
+
+    <div class="content-cost-container">
+        <form action="{{ route('update') }}" id="update" method="POST">
+            @csrf
+            <input type="hidden" name="name[][name]" value="{{ $person->name }}">
+            <div id="content-cost-container">
+                
+            </div>
+            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+        </form>
     </div>
+
+<div class="add-store-btn-container">
+    <div class="add-store">
+        {{-- <form action="{{ route('add', ['name'=>$person->name]) }}" method="GET">
+            <button type="submit" class="btn add-btn add-btn2">追加</button>
+        </form> --}}
+        <button type="submit" class="btn add-btn add-btn2" onclick="addInput()">追加</button>
+
+        <button class="btn store-btn" form="update" type="submit">保存</button>
+    </div>
+</div>
 @endsection

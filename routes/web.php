@@ -26,3 +26,5 @@ Route::get('/amount/{id}', [SpritTheBill::class, 'showAmount'])->name('amount');
 Route::get('/amount/add/{name}', [SpritTheBill::class, 'exeAdd'])->name('add');
 // 内容削除
 Route::post('/amount/delete/{id}', [SpritTheBill::class, 'exeDeleteContent'])->name('deleteContent');
+// 更新処理
+Route::post('/amount/update', [SpritTheBill::class, 'exeUpdate'])->name('update');

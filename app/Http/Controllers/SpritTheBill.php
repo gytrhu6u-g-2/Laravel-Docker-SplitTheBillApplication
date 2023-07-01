@@ -120,5 +120,15 @@ class SpritTheBill extends Controller
         }
         return redirect(route('amount', ['id' => $person->id, 'person' => [$person], 'datas' => $datas, 'persons'=>$persons]))->with('err_msg', '削除に失敗しました。');
     }
+
+    /**
+     * 更新処理
+     * @param request
+     * @return view
+     */
+    public function exeUpdate(Request $requests) {
+        $contents = $requests->input('contents');
+        dd($contents);
+    }
 }
 
