@@ -26,8 +26,8 @@ function addInput() {
     var html = `
     <div class="content-cost">
         <div class="input-content-cost">
-            <input id="content" type="text" class="content" placeholder="内容" name="contents[${counter}][content]">
-            <input id="cost" type="text" class="cost" placeholder="金額" name="contents[${counter}][cost]">
+            <input id="content" type="text" class="content" placeholder="内容" name="contents[${counter}][content]" required>
+            <input id="cost" type="number" class="cost" placeholder="金額" name="contents[${counter}][cost]" required>
         </div>
         <div>
             <button type="button" class="delete-btn btn delete-btn2 delbtn" onclick="deleteContent()">削除</button>

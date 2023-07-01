@@ -5,7 +5,7 @@
     <meta name="viewport" container="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ asset('./css/style.css') }}">
     <script type="text/javascript" src="{{ asset('./js/main.js') }}"></script>
-    <title>Top画面</title>
+    <title>@yield('title', 'Top画面')</title>
 </head>
 <body>
     <div class="container">

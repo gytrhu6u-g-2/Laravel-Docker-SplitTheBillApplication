@@ -70,8 +70,8 @@ class SpritTheBill extends Controller
         if (empty($person)) {
             return redirect(route('index.top'))->with('err_msg','idが見つかりませんでした。');
         }
-        $datas = Content::where('name', '=', $person['name'])->get();
-        return view('index.enterAmount', ['person' => [$person], 'persons'=>$persons, 'datas'=>$datas]);
+        // $datas = Content::where('name', '=', $person['name'])->get();
+        return view('index.enterAmount', ['person' => [$person], 'persons'=>$persons]);
     }
 
 
@@ -122,13 +122,41 @@ class SpritTheBill extends Controller
     }
 
     /**
-     * 更新処理
+     * 内容追加処理
      * @param request
      * @return view
      */
-    public function exeUpdate(Request $requests) {
-        $contents = $requests->input('contents');
-        dd($contents);
+    public function exeContentStore(Request $requests) {
+        $datas = $requests->all();
+        $persons = Person::get();
+        // dd($datas);
+        $person = Person::where('name',$datas['name'][0]['name'])->get();
+        // dd($person[0]->id);
+        // 配列の数を数える
+    //    $count = count($datas['contents']);
+        // 配列のキーを取り出す（1番目）
+       $count = key($datas['contents']);
+        // dd($count);
+        DB::beginTransaction();
+        try {
+            for($i=0;$i<=$count;$i++){
+                if(isset($datas['contents'][$i]['content'])) {
+                    Content::create([
+                        'name' => $datas['name'][0]['name'],
+                        'content' => $datas['contents'][$i]['content'],
+                        'cost' => (int) $datas['contents'][$i]['cost'],
+                    ]);
+                    DB::commit();
+                }
+            }
+        }
+        catch (\Exception $e) {
+            abort('500');
+            DB::rollBack();
+        }
+        // session()->flash('success_msg','データの登録完了しました');
+        // return view('index.enterAmount',['person'=>$person, 'persons'=>$persons]);
+        return redirect(route('amount', ['id' => $person[0]->id]))->with('success_msg','データの登録完了しました');
     }
 }
 
