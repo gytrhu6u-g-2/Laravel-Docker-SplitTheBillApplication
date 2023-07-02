@@ -27,7 +27,39 @@ class SpritTheBill extends Controller
      */
     public function showTotaling() {
         $persons = Person::get();
-        return view('index.totaling', compact('persons'));
+        // dd($persons);
+        // 名前の取得
+        $names = Person::get('name');
+        $name = $names[0]['name'];
+        // dd($names);
+        $count = count($persons);
+        $contents = Content::get();
+        // dd($contents);
+
+        $arrays = [];
+
+        // 個人の合計金額
+        for ($i=0;$i<$count;$i++) {
+            // $eachName = Person::where('name',$names[$i]['name'])->get();
+            $eachSums = Content::selectRaw('SUM(cost)')->where('name',$names[$i]['name'])->get();
+            // $arrays[$i]['name'] = $eachName;
+            $arrays[$i] = $eachSums;
+            // $arrays[$i]['costSum'] = $eachSums;
+        }
+        // dd($arrays['costSum']);
+        // dd($arrays[0][0]['SUM(cost)']);
+        // dd($arrays[0]['costSum'][0]['SUM(cost)']);
+
+        // 合計金額
+        $sums = Content::selectRaw('SUM(cost)')->get();
+        $sum = (int) $sums[0]['SUM(cost)'];
+
+        // $arrNumをviewに返すことでbreakを使ってもforで数字をリセットさせない
+        $arrNum = 0;
+      
+        // return view('index.totaling', compact('persons'), compact('sum'), $arrays);
+        return view('index.totaling', compact('persons', 'sum', 'arrays','count','arrNum'));
+        // return view('index.totaling', compact('persons', 'sum'), $arrays);
     }
 
 
@@ -60,8 +92,15 @@ class SpritTheBill extends Controller
      * @return view
      */
     public function exeDelete($id) {
+        // Personテーブルのid
         $person = Person::find($id);
+        // Contentテーブルの名前取得
+        $contents = Content::where('name',$person['name'])->get();
         if (!empty($id)) {
+            // レコードが複数存在する場合のためforeachで処理
+            foreach($contents as $content) {
+                $content->delete();
+            }
             $person->delete();
             return redirect(route('top'))->with('success_msg','削除しました。');
         }
