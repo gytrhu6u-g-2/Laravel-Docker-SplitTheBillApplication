@@ -12,21 +12,30 @@
                             <td>{{ $peson->name }}</td>
                         </tr>
                         {{-- @foreach ($arrays as $array) --}}
-                        <tr>
-                            <th scope="row">合計</th>
-                            @for ($arrNum;$arrNum<$count;$arrNum++)
-                                <td>￥ {{ $arrays[$arrNum][0]['SUM(cost)'] }}</td>
-                                <?php
-                                    $arrNum += 1; 
-                                ?>
-                                @break
-                            @endfor
-                        </tr>
-                        {{-- @endforeach --}}
-                        <tr>
-                            <th scope="row">支払い</th>
-                            <td>￥2,670</td>
-                        </tr>
+                        @for ($arrNum;$arrNum<$count;$arrNum++)
+                            <tr>
+                                @if ($arrays[$arrNum][0]['SUM(cost)'] > 0)
+                                    <th scope="row">合計</th>
+                                    <td>￥{{ $arrays[$arrNum][0]['SUM(cost)'] }}</td>
+                                @else
+                                    <th scope="row">合計</th>
+                                    <td>￥0</td>
+                                @endif
+                            </tr>
+                            <tr>
+                                @if ($division - $arrays[$arrNum][0]['SUM(cost)'] >= 0)
+                                    <th scope="row">支払い</th>
+                                    <td class="money">￥{{ $division - $arrays[$arrNum][0]['SUM(cost)'] }}</td>
+                                @else
+                                    <th scope="row">受け取り</th>
+                                    <td class="money">￥{{ ($division - $arrays[$arrNum][0]['SUM(cost)']) * -1 }}</td>
+                                @endif
+                            </tr>
+                            <?php
+                                $arrNum += 1; 
+                            ?>
+                            @break
+                        @endfor
                     </tbody>
                 </table>
         @endforeach
@@ -34,7 +43,7 @@
     <div class="showing-total-amount-container">
         <div class="showing-total-amount">
             <span class="total-title">総支出</span>
-            <span class="total-amount">￥ {{ $sum }}</span>
+            <span class="total-amount">￥{{ $sum }}</span>
         </div>
     </div>
 @endsection

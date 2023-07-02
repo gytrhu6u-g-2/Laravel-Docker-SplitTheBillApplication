@@ -27,46 +27,43 @@ class SpritTheBill extends Controller
      */
     public function showTotaling() {
         $persons = Person::get();
-        // dd($persons);
+
+        // 配列の存在確認
+        if ($persons->isEmpty()) {
+            return redirect(route('top'))->with('err_msg', 'メンバーを追加してください');
+        }
+
         // 名前の取得
         $names = Person::get('name');
-        $name = $names[0]['name'];
-        // dd($names);
+        
+        // 要素の数取得
         $count = count($persons);
         $contents = Content::get();
-        // dd($contents);
-
         $arrays = [];
 
         // 個人の合計金額
         for ($i=0;$i<$count;$i++) {
-            // $eachName = Person::where('name',$names[$i]['name'])->get();
             $eachSums = Content::selectRaw('SUM(cost)')->where('name',$names[$i]['name'])->get();
-            // $arrays[$i]['name'] = $eachName;
             $arrays[$i] = $eachSums;
-            // $arrays[$i]['costSum'] = $eachSums;
         }
-        // dd($arrays['costSum']);
-        // dd($arrays[0][0]['SUM(cost)']);
-        // dd($arrays[0]['costSum'][0]['SUM(cost)']);
 
         // 合計金額
         $sums = Content::selectRaw('SUM(cost)')->get();
         $sum = (int) $sums[0]['SUM(cost)'];
 
-        // $arrNumをviewに返すことでbreakを使ってもforで数字をリセットさせない
+        // 合計/人数
+        $division = floor($sum / $count);
+
+        // viewに渡す。for文でリセットさせない
         $arrNum = 0;
-      
-        // return view('index.totaling', compact('persons'), compact('sum'), $arrays);
-        return view('index.totaling', compact('persons', 'sum', 'arrays','count','arrNum'));
-        // return view('index.totaling', compact('persons', 'sum'), $arrays);
+        
+        return view('index.totaling', compact('persons', 'sum', 'arrays','count','arrNum','division'));
     }
 
 
     /**
      * 追加ボタン後の処理
      * @param request
-     * @return view
      */
     public function exeStore(Request $request) {
 
@@ -89,7 +86,6 @@ class SpritTheBill extends Controller
     /**
      * 削除機能
      * @param id
-     * @return view
      */
     public function exeDelete($id) {
         // Personテーブルのid
@@ -150,7 +146,6 @@ class SpritTheBill extends Controller
     /**
      * 内容削除処理
      * @param id
-     * @return view
      */
     public function exeDeleteContent($id) {
         $content = Content::find($id);
@@ -169,7 +164,6 @@ class SpritTheBill extends Controller
     /**
      * 内容追加処理
      * @param request
-     * @return view
      */
     public function exeContentStore(Request $requests) {
         $datas = $requests->all();

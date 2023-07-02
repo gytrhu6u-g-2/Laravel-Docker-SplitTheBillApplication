@@ -40,6 +40,20 @@ function addInput() {
     counter++;
   }
 
+
+  function kanmaChange(inputAns){
+    console.log(inputAns);
+    let inputAnsValue = inputAns.value;
+    console.log(inputAnsValue);
+    let numberAns = inputAnsValue.replace(/[^0-9]/g, "");
+    kanmaAns = numberAns.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,');
+    console.log(kanmaAns);
+    if(kanmaAns.match(/[^0-9]/g)){
+     inputAns.value= kanmaAns;
+     return true;
+    }
+   };
+
 // 削除ボタン
 function deleteContent() {
     const element = document.getElementsByClassName('delbtn');
@@ -49,6 +63,6 @@ function deleteContent() {
         element[i].addEventListener("click", function() {
             targetElement.remove();
         });
-      }
+    }
     
 }
