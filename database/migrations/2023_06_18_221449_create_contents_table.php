@@ -14,13 +14,12 @@ return new class extends Migration
         if (!Schema::hasTable('contents')) {
             Schema::create('contents', function (Blueprint $table) {
                 $table->id();
-                $table->string('name');
-                $table->text('content');
-                $table->integer('cost');
+                $table->string('name')->comment('名前');
+                $table->text('content')->comment('内容');
+                $table->integer('cost')->comment('金額');
                 $table->timestamps();
             });
         }
-        
     }
 
     /**

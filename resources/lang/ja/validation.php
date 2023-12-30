@@ -155,6 +155,8 @@ return [
 
     'attributes' => [
         'name' => '名前',
+        'content' => '内容',
+        'cost' => '金額',
     ],
 
 ];
